@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Panel</title>
+        <link rel="icon" href="../images/IMG_0011.ico" type="image/x-icon">
+        <link href="../output.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Include the notification utility -->
+        <script src="../scripts/notifications.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.min.js"></script>
+        <!-- Google Charts Loader for GeoChart -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script defer src="../scripts/addBlog.js"></script>
+        <script defer src="../scripts/logout.js"></script>
+        <script defer src="../scripts/sessionManager.js"></script>
+        <!-- Provide Maps API key so GeoChart can authenticate -->
+        <script>
+                // TODO: Replace with your actual key or inject it server-side.
+                window.GOOGLE_MAPS_API_KEY = 'YOUR_GOOGLE_MAPS_API_KEY_HERE';
+        </script>
+        <script defer src="../scripts/analytics.js"></script>
+        <style>
+                /* Additional styling for the rich text editor */
+                #editor {
+                        height: 300px;
+                        width: 100%;
+                        max-width: 800px;
+                        border: 1px solid #64748b;
+                        border-radius: 0.375rem;
+                        overflow-y: auto;
+                        margin: 0 auto;
+                        background-color: #181e24;
+                        color: #e5e7eb;
+                }
+
+                /* Adjust spacing and centering */
+                .blog-container-main {
+                        padding: 2rem;
+                        max-width: 100%;
+                        margin: auto;
+                }
+
+                .toolbar {
+                        margin-bottom: 1rem;
+                }
+
+                /* Responsive padding adjustments */
+                .input,
+                .file-input {
+                        margin-top: 1rem;
+                        margin-bottom: 1rem;
+                }
+                /* Remove glossy finish from form elements */
+                select, input, button {
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        appearance: none;
+                        background-image: none !important;
+                }
+                
+                /* Remove default select arrow */
+                select {
+                        background-image: none !important;
+                        background: transparent !important;
+                }
+                
+                /* Custom select arrow */
+                select {
+                        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+                        background-repeat: no-repeat !important;
+                        background-position: right 0.5rem center !important;
+                        background-size: 1em !important;
+                        padding-right: 2.5rem !important;
+                }
+        </style>
+</head>
+
+<body class="bg-background text-text min-h-screen flex flex-col">
+        <div class="wrapper min-h-screen flex flex-col w-full">
+                <!-- Navbar -->
+                <nav class="w-full bg-card border-b border-faded">
+                        <div class="flex items-center justify-between max-w-6xl mx-auto px-4 py-3">
+                                <a href="./index.html" class="flex items-center space-x-2">
+                                        <img src="../images/Sample.png" alt="AfroJamSzn Logo" class="h-10 w-10 object-contain">
+                                        <span class="font-bold text-lg tracking-tight">AfroJamSzn</span>
+                                </a>
+                                <div class="flex items-center space-x-4">
+                                        <div class="relative">
+                                                <button class="flex items-center space-x-2 px-4 py-2 rounded-lg bg-faded text-white font-semibold hover:bg-accent transition-colors duration-200"
+                                                        id="userMenuBtn">
+                                                        <img src="../images/profile-avatar.png" alt="Avatar"
+                                                                class="w-8 h-8 rounded-full" />
+                                                        <span>Admin</span>
+                                                </button>
+                                                <div class="hidden absolute right-0 mt-2 w-48 bg-card rounded-lg shadow-lg border border-faded z-10"
+                                                        id="userMenu">
+                                                        <a href="#" id="logoutBtn"
+                                                                class="block px-4 py-2 text-text hover:bg-accent transition-colors duration-200 rounded-lg">Logout</a>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </nav>
+
+                <!-- Add Analytics tab in admin navigation -->
+                <nav class="admin-nav flex space-x-4 mb-8 px-4 mt-8">
+                        <a href="#" id="postsTab"
+                                class="tab-link active px-4 py-2 rounded-lg bg-accent text-white font-semibold">Posts</a>
+                        <a href="admin-home.html" id="managePostsLink" class="px-4 py-2 rounded-lg bg-faded text-white font-semibold hover:bg-accent transition-colors duration-200">Manage Posts</a>
+                        <a href="#" id="analyticsTab"
+                                class="tab-link px-4 py-2 rounded-lg bg-faded text-white font-semibold hover:bg-accent transition-colors duration-200">Analytics</a>
+                </nav>
+
+                <!-- Blog Editor Container -->
+                <section id="blogEditorSection"
+                        class="blog-container-main flex flex-col items-center w-full md:w-10/12 space-y-8 text-center">
+                        <h1 class="text-2xl md:text-4xl font-bold">Publish Blog</h1>
+
+                        <!-- Blog Form -->
+                        <form id="blogForm" class="w-full flex flex-col items-center space-y-6"
+                                enctype="multipart/form-data">
+                                <input type="text" placeholder="Enter Blog Title"
+                                        class="w-4/5 md:w-1/2 px-4 py-3 bg-background border border-faded rounded-lg text-text placeholder-faded focus:border-accent focus:ring-2 focus:ring-accent focus:outline-none transition-colors duration-200"
+                                        id="title" name="title" />
+                                <input type="text" placeholder="Enter Author Name"
+                                        class="w-4/5 md:w-1/2 px-4 py-3 bg-background border border-faded rounded-lg text-text placeholder-faded focus:border-accent focus:ring-2 focus:ring-accent focus:outline-none transition-colors duration-200"
+                                        id="author" name="author" />
+
+                                <!-- Quill Editor -->
+                                <div id="editor"></div>
+
+                                <!-- Hidden File Input for Inline Image Upload (still needed for Quill custom handler, but button is removed) -->
+                                <input type="file" id="inlineImageUpload" style="display: none;" accept="image/*">
+
+                                <!-- Tags and Header Image Upload with Spacing -->
+                                <!-- Category Selection -->
+                                <select id="category" name="category"
+                                        class="w-4/5 md:w-1/2 px-4 py-3 bg-background border border-faded rounded-lg text-text focus:border-accent focus:ring-2 focus:ring-accent focus:outline-none transition-colors duration-200"
+                                        form="blogForm">
+                                        <option value="New Releases">New Releases</option>
+                                        <option value="Artists">Artists</option>
+                                        <option value="Music Videos">Music Videos</option>
+                                        <option value="Trending/Charts">Trending / Charts</option>
+                                        <!-- Genre will be picked separately -->
+                                        <!-- Removed Genres option -->
+                                </select>
+
+                                <!-- Genre Selection (hidden unless category=Genres) -->
+                                <select id="genre" name="genre"
+                                        class="w-4/5 md:w-1/2 px-4 py-3 bg-background border border-faded rounded-lg text-text focus:border-accent focus:ring-2 focus:ring-accent focus:outline-none transition-colors duration-200"
+                                        form="blogForm">
+                                        <option value="">None</option>
+                                        <option value="Afrobeats">Afrobeats</option>
+                                        <option value="Amapiano">Amapiano</option>
+                                        <option value="Hip-Hop">Hip-Hop</option>
+                                        <option value="Gospel">Gospel</option>
+                                </select>
+
+                                <input type="text" placeholder="Tags"
+                                        class="w-4/5 md:w-1/2 px-4 py-3 bg-background border border-faded rounded-lg text-text placeholder-faded focus:border-accent focus:ring-2 focus:ring-accent focus:outline-none transition-colors duration-200"
+                                        name="tags" id="tags" />
+                                <input type="text" placeholder="Author Twitter/X Link (e.g., https://x.com/username)"
+                                        class="w-4/5 md:w-1/2 px-4 py-3 bg-background border border-faded rounded-lg text-text placeholder-faded focus:border-accent focus:ring-2 focus:ring-accent focus:outline-none transition-colors duration-200"
+                                        name="authorTwitter" id="authorTwitter" />
+                                <p class="text-center text-faded">Upload Header Image <span class="text-red-400">**Must
+                                                Not Exceed 20MB**</span></p>
+                                <input type="file"
+                                        class="w-full max-w-xs px-4 py-3 bg-background border border-faded rounded-lg text-text file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-accent file:text-white hover:file:bg-blue-700 transition-colors duration-200"
+                                        name="headerImage" id="headerImage" accept="image/*" />
+
+                                <!-- Publish Button with Space Above -->
+                                <button type="submit"
+                                        class="px-8 py-3 rounded-lg bg-accent text-white font-semibold hover:bg-blue-700 transition-colors duration-200"
+                                        id="publishBtn">Save & Publish</button>
+                        </form>
+                </section>
+
+                <!-- Analytics Dashboard Section (hidden by default) -->
+                <section id="analyticsSection" class="hidden w-full max-w-6xl mx-auto px-4 pb-12">
+                        <div class="flex justify-between items-center mb-8">
+                                <h1 class="text-2xl md:text-4xl font-bold">Analytics Dashboard</h1>
+                                <button id="refreshAnalyticsBtn"
+                                        class="px-4 py-2 bg-accent text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                                        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                                                </path>
+                                        </svg>
+                                        Refresh Data
+                                </button>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <!-- Page Views -->
+                                <div
+                                        class="bg-card rounded-lg p-6 shadow border border-faded flex flex-col items-center">
+                                        <h2 class="font-semibold text-lg mb-2">Page Views</h2>
+                                        <div id="analyticsPageViews" class="text-3xl font-bold">-</div>
+                                        <div class="text-faded text-sm">Know what content gets the most traffic</div>
+                                </div>
+                                <!-- Unique Visitors -->
+                                <div
+                                        class="bg-card rounded-lg p-6 shadow border border-faded flex flex-col items-center">
+                                        <h2 class="font-semibold text-lg mb-2">Unique Visitors</h2>
+                                        <div id="analyticsUniqueVisitors" class="text-3xl font-bold">-</div>
+                                        <div class="text-faded text-sm">Estimate your userbase size</div>
+                                </div>
+                                <!-- Sessions -->
+                                <div
+                                        class="bg-card rounded-lg p-6 shadow border border-faded flex flex-col items-center">
+                                        <h2 class="font-semibold text-lg mb-2">Sessions</h2>
+                                        <div id="analyticsSessions" class="text-3xl font-bold">-</div>
+                                        <div class="text-faded text-sm">Group pageviews into one visit</div>
+                                </div>
+                                <!-- Referrer -->
+                                <div
+                                        class="bg-card rounded-lg p-6 shadow border border-faded flex flex-col items-center">
+                                        <h2 class="font-semibold text-lg mb-2">Referrer</h2>
+                                        <div id="analyticsReferrer" class="text-3xl font-bold">-</div>
+                                        <div class="text-faded text-sm">Know where people are coming from (e.g.,
+                                                Twitter, Google)</div>
+                                </div>
+                                <!-- Bounce Rate -->
+                                <div
+                                        class="bg-card rounded-lg p-6 shadow border border-faded flex flex-col items-center">
+                                        <h2 class="font-semibold text-lg mb-2">Bounce Rate</h2>
+                                        <div id="analyticsBounceRate" class="text-3xl font-bold">-</div>
+                                        <div class="text-faded text-sm">Are people leaving after one page?</div>
+                                </div>
+                                <!-- Session Duration -->
+                                <div
+                                        class="bg-card rounded-lg p-6 shadow border border-faded flex flex-col items-center">
+                                        <h2 class="font-semibold text-lg mb-2">Session Duration</h2>
+                                        <div id="analyticsSessionDuration" class="text-3xl font-bold">-</div>
+                                        <div class="text-faded text-sm">How long do people stay on your site?</div>
+                                </div>
+                                <!-- Geolocation -->
+                                <div
+                                        class="bg-card rounded-lg p-6 shadow border border-faded flex flex-col items-center">
+                                        <h2 class="font-semibold text-lg mb-2">Geolocation</h2>
+                                        <div id="analyticsGeolocationMap" class="w-full h-24 mb-2"></div>
+                                        <div id="analyticsGeolocation" class="text-lg font-bold mb-1">-</div>
+                                        <div class="text-faded text-sm">Understand where your audience is</div>
+                                </div>
+                                <!-- Device/OS/Browser -->
+                                <div
+                                        class="bg-card rounded-lg p-6 shadow border border-faded flex flex-col items-center">
+                                        <h2 class="font-semibold text-lg mb-2">Device/OS/Browser</h2>
+                                        <div id="analyticsDeviceOSBrowser" class="text-3xl font-bold">-</div>
+                                        <div class="text-faded text-sm">Useful for testing, design decisions</div>
+                                </div>
+                                <!-- Scroll Depth -->
+                                <div
+                                        class="bg-card rounded-lg p-6 shadow border border-faded flex flex-col items-center">
+                                        <h2 class="font-semibold text-lg mb-2">Scroll Depth</h2>
+                                        <div id="analyticsScrollDepth" class="text-3xl font-bold">-</div>
+                                        <div class="text-faded text-sm">Did users actually read or just bounce?</div>
+                                </div>
+                                <!-- Click Events -->
+                                <div
+                                        class="bg-card rounded-lg p-6 shadow border border-faded flex flex-col items-center">
+                                        <h2 class="font-semibold text-lg mb-2">Click Events</h2>
+                                        <div id="analyticsClickEvents" class="text-3xl font-bold">-</div>
+                                        <div class="text-faded text-sm">What links or buttons get used</div>
+                                </div>
+                                <!-- UTM Tags -->
+                                <div
+                                        class="bg-card rounded-lg p-6 shadow border border-faded flex flex-col items-center">
+                                        <h2 class="font-semibold text-lg mb-2">UTM Tags</h2>
+                                        <div id="analyticsUTMTags" class="text-3xl font-bold">-</div>
+                                        <div class="text-faded text-sm">Marketing performance tracking</div>
+                                </div>
+                                <!-- Errors/404s -->
+                                <div
+                                        class="bg-card rounded-lg p-6 shadow border border-faded flex flex-col items-center">
+                                        <h2 class="font-semibold text-lg mb-2">Errors/404s</h2>
+                                        <div id="analyticsErrors" class="text-3xl font-bold">-</div>
+                                        <div class="text-faded text-sm">Spot broken links or bugs</div>
+                                </div>
+                        </div>
+                </section>
+        </div>
+        <!-- Cookie Consent Modal -->
+        <div id="cookieConsentModal"
+                class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+                <div
+                        class="bg-card rounded-lg p-8 max-w-md w-full shadow-lg border border-faded flex flex-col items-center">
+                        <h2 class="text-xl font-bold mb-2">Cookie Consent</h2>
+                        <p class="text-faded mb-4 text-center">We use cookies to collect analytics data (page views,
+                                sessions, device info, etc.) to improve your experience. You can choose what to allow.
+                        </p>
+                        <div id="cookieCustomizeSection" class="w-full mb-4 hidden">
+                                <label class="flex items-center mb-2">
+                                        <input type="checkbox" id="consentAnalytics" class="mr-2" checked>
+                                        <span>Analytics (page views, sessions, device info)</span>
+                                </label>
+                                <label class="flex items-center mb-2">
+                                        <input type="checkbox" id="consentClicks" class="mr-2" checked>
+                                        <span>Click Tracking</span>
+                                </label>
+                                <label class="flex items-center mb-2">
+                                        <input type="checkbox" id="consentScroll" class="mr-2" checked>
+                                        <span>Scroll Depth</span>
+                                </label>
+                                <label class="flex items-center mb-2">
+                                        <input type="checkbox" id="consentErrors" class="mr-2" checked>
+                                        <span>Error Reporting</span>
+                                </label>
+                        </div>
+                        <div class="flex space-x-4 w-full justify-center">
+                                <button id="cookieAcceptAll"
+                                        class="px-4 py-2 rounded bg-accent text-white font-semibold hover:bg-blue-700 transition">Accept
+                                        All</button>
+                                <button id="cookieCustomize"
+                                        class="px-4 py-2 rounded bg-faded text-white font-semibold hover:bg-accent transition">Customize</button>
+                                <button id="cookieRejectAll"
+                                        class="px-4 py-2 rounded bg-red-600 text-white font-semibold hover:bg-red-700 transition">Reject
+                                        All</button>
+                        </div>
+                </div>
+        </div>
+        <!-- Analytics Detail Modal -->
+        <div id="analyticsDetailModal"
+                class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+                <div class="bg-card rounded-lg p-6 max-w-xl w-full shadow-lg border border-faded flex flex-col">
+                        <h2 id="detailModalTitle" class="text-xl font-bold mb-4 text-center"></h2>
+                        <div id="detailModalContent" class="text-text max-h-96 overflow-y-auto space-y-2"></div>
+                        <button id="closeDetailModal"
+                                class="mt-6 px-4 py-2 bg-accent text-white rounded-lg self-center hover:bg-blue-700 transition">Close</button>
+                </div>
+        </div>
+        <style>
+                /* Ensure analytics card values wrap so long text doesn’t overflow */
+                .analytics-card-value {
+                        word-break: break-word;
+                }
+        </style>
+        <script>
+                // Toggle user menu
+                document.getElementById('userMenuBtn').addEventListener('click', function () {
+                        const menu = document.getElementById('userMenu');
+                        menu.classList.toggle('hidden');
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function (event) {
+                        const menu = document.getElementById('userMenu');
+                        const btn = document.getElementById('userMenuBtn');
+                        if (!btn.contains(event.target) && !menu.contains(event.target)) {
+                                menu.classList.add('hidden');
+                        }
+                });
+
+                // Redirect to admin login page if not authenticated
+                document.addEventListener('DOMContentLoaded', function () {
+                        const token = localStorage.getItem('token') || (document.cookie.match(/(?:^| )token=([^;]+)/) || [])[1];
+                        if (!token) {
+                                window.location.href = 'admin-login.html';
+                        }
+                });
+
+                // Tab switching logic for Posts/Analytics
+                const postsTab = document.getElementById('postsTab');
+                const analyticsTab = document.getElementById('analyticsTab');
+                const blogEditorSection = document.getElementById('blogEditorSection');
+                const analyticsSection = document.getElementById('analyticsSection');
+
+                postsTab.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        postsTab.classList.add('bg-accent', 'text-white');
+                        postsTab.classList.remove('bg-faded');
+                        analyticsTab.classList.remove('bg-accent', 'text-white');
+                        analyticsTab.classList.add('bg-faded');
+                        blogEditorSection.classList.remove('hidden');
+                        analyticsSection.classList.add('hidden');
+                });
+                analyticsTab.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        analyticsTab.classList.add('bg-accent', 'text-white');
+                        analyticsTab.classList.remove('bg-faded');
+                        postsTab.classList.remove('bg-accent', 'text-white');
+                        postsTab.classList.add('bg-faded');
+                        blogEditorSection.classList.add('hidden');
+                        analyticsSection.classList.remove('hidden');
+                });
+
+                // Cookie Consent Modal Logic
+                function showCookieModal() {
+                        document.getElementById('cookieConsentModal').classList.remove('hidden');
+                }
+                function hideCookieModal() {
+                        document.getElementById('cookieConsentModal').classList.add('hidden');
+                }
+                function saveConsent(consent) {
+                        localStorage.setItem('cookieConsent', JSON.stringify(consent));
+                }
+                function getConsent() {
+                        const c = localStorage.getItem('cookieConsent');
+                        return c ? JSON.parse(c) : null;
+                }
+                // Skip cookie consent modal in admin panel
+                // (Admin users are assumed to trust analytics collection)
+                document.getElementById('cookieAcceptAll').onclick = function () {
+                        saveConsent({ analytics: true, clicks: true, scroll: true, errors: true });
+                        hideCookieModal();
+                };
+                document.getElementById('cookieRejectAll').onclick = function () {
+                        saveConsent({ analytics: false, clicks: false, scroll: false, errors: false });
+                        hideCookieModal();
+                };
+                document.getElementById('cookieCustomize').onclick = function () {
+                        const section = document.getElementById('cookieCustomizeSection');
+                        section.classList.toggle('hidden');
+                        if (!section.classList.contains('hidden')) {
+                                // Save on change
+                                ['consentAnalytics', 'consentClicks', 'consentScroll', 'consentErrors'].forEach(id => {
+                                        document.getElementById(id).onchange = function () {
+                                                saveConsent({
+                                                        analytics: document.getElementById('consentAnalytics').checked,
+                                                        clicks: document.getElementById('consentClicks').checked,
+                                                        scroll: document.getElementById('consentScroll').checked,
+                                                        errors: document.getElementById('consentErrors').checked
+                                                });
+                                        };
+                                });
+                        }
+                };
+        </script>
+</body>
+
+</html>

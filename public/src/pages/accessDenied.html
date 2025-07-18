@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../images/IMG_0011.ico" type="image/x-icon">
+        <title>Access Denied</title>
+        <link href="../output.css" rel="stylesheet">
+        <style>
+                /* Center content vertically and horizontally */
+                body,
+                html {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100vh;
+                        margin: 0;
+                }
+
+                /* Prevent brief display of content */
+                .container {
+                        opacity: 0;
+                        animation: fadeIn 0.3s forwards;
+                }
+
+                @keyframes fadeIn {
+                        to {
+                                opacity: 1;
+                        }
+                }
+        </style>
+</head>
+
+<body class="bg-background text-text">
+        <div class="container text-center">
+                <h1 class="text-3xl md:text-5xl font-bold text-red-500 mb-4">Access Denied</h1>
+                <p class="mt-4 text-lg text-faded mb-2">You do not have permission to view this page.</p>
+                <p class="text-faded">Redirecting you to the homepage in 3 seconds...</p>
+        </div>
+        <script>
+                setTimeout(() => {
+                        // Try to close the window
+                        window.close();
+
+                        // If the window didn't close, redirect instead
+                        if (!window.closed) {
+                                window.location.href = 'index.html';
+                        }
+                }, 3000);
+        </script>
+</body>
+
+</html>

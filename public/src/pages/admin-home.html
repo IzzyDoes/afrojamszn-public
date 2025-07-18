@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../images/IMG_0011.ico" type="image/x-icon">
+        <title>Admin – Manage Posts | AfroJamSzn</title>
+        <!-- Compiled Tailwind CSS -->
+        <link href="../output.css" rel="stylesheet">
+        <style>
+                /* Remove glossy finish from form elements */
+                select, input, button {
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        appearance: none;
+                        background-image: none!important;
+                }
+                /* Remove default select arrow */
+                select {
+                        background-image: none!important;
+                        background: transparent!important;
+                }
+                /* Custom select arrow */
+                select {
+                        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e")!important;
+                        background-repeat: no-repeat!important;
+                        background-position: right 0.5rem center!important;
+                        background-size: 1em!important;
+                        padding-right: 2.5rem!important;
+                }
+        </style>
+        <!-- SweetAlert2 for notifications -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="../scripts/search.js" defer></script>
+</head>
+
+<body class="bg-background text-text min-h-screen flex flex-col">
+        <div class="wrapper flex flex-col min-h-screen">
+                <!-- Navbar -->
+                <nav class="w-full bg-card border-b border-faded">
+                        <div class="flex items-center justify-between max-w-6xl mx-auto px-4 py-3">
+                                <a href="admin-home.html" class="flex items-center space-x-2">
+                                        <img src="../images/Sample.png" alt="AfroJamSzn Logo" class="h-10 w-10 object-contain">
+                                        <span class="font-bold text-lg tracking-tight">AfroJamSzn Admin</span>
+                                </a>
+                                <div class="flex items-center space-x-4">
+                                        <!-- Only show logout for authenticated users (handled by scripts.js) -->
+                                        <button id="logoutBtn" class="hidden px-4 py-2 rounded-lg bg-faded text-white font-semibold hover:bg-red-600 transition-colors duration-200">Logout</button>
+                                </div>
+                        </div>
+                </nav>
+
+                <!-- Secondary navigation -->
+                <nav class="admin-nav flex space-x-4 mb-8 px-4 mt-8">
+                        <a href="admin.html" class="px-4 py-2 rounded-lg bg-faded text-white font-semibold hover:bg-accent transition-colors duration-200">Back to Editor</a>
+                </nav>
+
+                <!-- Search Bar -->
+                <div class="flex justify-center mt-8 px-4">
+                        <div class="w-full max-w-xl flex flex-col md:flex-row items-center gap-4">
+                                <label class="block flex-1">
+                                        <span class="sr-only">Search</span>
+                                        <input type="text" id="search-input" class="block w-full rounded-lg border border-faded bg-card text-text px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-colors duration-200" placeholder="Search posts..." />
+                                </label>
+                                <select id="category-filter" class="rounded-lg border border-faded bg-card text-text px-3 py-3 focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-200">
+                                        <option value="All">All Categories</option>
+                                        <option value="New Releases">New Releases</option>
+                                        <option value="Artists">Artists</option>
+                                        <option value="Music Videos">Music Videos</option>
+                                        <option value="Trending/Charts">Trending / Charts</option>
+                                        <option value="Interviews">Interviews</option>
+                                </select>
+                        </div>
+                </div>
+
+                <!-- Blog List -->
+                <main class="flex-1 flex flex-col items-center mt-8">
+                        <section class="card-container-main w-full max-w-4xl px-4">
+                                <!-- Blog posts rendered by scripts.js -->
+                        </section>
+                        <!-- Pagination rendered by scripts.js -->
+                </main>
+
+                <div class="divider w-full border-t border-faded my-8"></div>
+
+                <!-- Footer -->
+                <footer class="footer w-full bg-card text-faded py-8 mt-auto">
+                        <div class="max-w-6xl mx-auto flex flex-col items-center space-y-2">
+                                <p class="text-xs">&copy; <span id="current-year"></span> AfroJamSzn.</p>
+                        </div>
+                </footer>
+        </div>
+        <script src="../scripts/scripts.js"></script>
+        <script src="../scripts/logout.js" defer></script>
+        <script src="../scripts/sessionManager.js" defer></script>
+        <script>
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+        </script>
+</body>
+
+</html> 

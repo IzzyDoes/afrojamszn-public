@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: blog-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: izzy
+      MONGO_INITDB_ROOT_PASSWORD: 1STstartFinish
+      MONGO_INITDB_DATABASE: blogApp
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+
+  blog-app:
+    build: .
+    container_name: blog-app
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGO_URI=mongodb://izzy:1STstartFinish@blog-mongodb:27017/blogApp
+      - JWT_SECRET=${JWT_SECRET}
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
+      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb_data:
+    driver: local 

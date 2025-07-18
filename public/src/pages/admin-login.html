@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Login - AfroJamSzn</title>
+        <link rel="icon" href="../images/IMG_0011.ico" type="image/x-icon">
+        <!-- Compiled Tailwind CSS -->
+        <link href="../output.css" rel="stylesheet">
+        <style>
+                /* Remove glossy finish from form elements */
+                select, input, button {
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        appearance: none;
+                        background-image: none !important;
+                }
+                
+                /* Remove default select arrow */
+                select {
+                        background-image: none !important;
+                        background: transparent !important;
+                }
+                
+                /* Custom select arrow */
+                select {
+                        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+                        background-repeat: no-repeat !important;
+                        background-position: right 0.5rem center !important;
+                        background-size: 1em !important;
+                        padding-right: 2.5rem !important;
+                }
+        </style>
+        <!-- SweetAlert2 for notifications -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Include the notification utility -->
+        <script src="../scripts/notifications.js"></script>
+        <!-- Include the login.js script -->
+        <script defer src="../scripts/login.js"></script>
+        <script src="../scripts/logout.js" defer></script>
+</head>
+
+<body class="bg-background text-text min-h-screen flex flex-col">
+        <div class="wrapper2 min-h-screen flex flex-col justify-between">
+                <!-- navbar -->
+                <nav class="w-full bg-card border-b border-faded">
+                        <div class="flex items-center justify-between max-w-6xl mx-auto px-4 py-3">
+                                <a href="https://afrojamszn.com" class="flex items-center space-x-2">
+                                        <img src="../images/Sample.png" alt="AfroJamSzn Logo" class="h-10 w-10 object-contain">
+                                        <span class="font-bold text-lg tracking-tight">AfroJamSzn Admin</span>
+                                </a>
+                        </div>
+                </nav>
+
+                <!-- login page -->
+                <div class="login-container flex flex-1 items-center justify-center px-4">
+                        <div
+                                class="w-full max-w-sm mx-auto overflow-hidden bg-card rounded-lg shadow-lg border border-faded">
+                                <div class="px-6 py-8">
+                                        <div class="flex items-center justify-center mb-6">
+                                                <img src="../images/Sample.png" alt="AfroJamSzn Logo" class="h-10 w-10 object-contain mr-2">
+                                                <span class="font-bold text-2xl tracking-tight ml-2">AfroJamSzn</span>
+                                        </div>
+
+                                        <h3 class="mt-3 text-xl font-medium text-center text-text mb-2">
+                                                Admin Access
+                                        </h3>
+
+                                        <p class="mt-1 text-center text-faded mb-6">Login to access admin panel</p>
+
+                                        <form id="loginForm">
+                                                <div class="w-full mb-4">
+                                                        <input class="block w-full px-4 py-3 text-text placeholder-faded bg-background border border-faded rounded-lg focus:border-accent focus:ring-2 focus:ring-accent focus:outline-none transition-colors duration-200"
+                                                                type="text" placeholder="Username" id="username"
+                                                                aria-label="Username" required />
+                                                </div>
+
+                                                <div class="w-full mb-6">
+                                                        <input class="block w-full px-4 py-3 text-text placeholder-faded bg-background border border-faded rounded-lg focus:border-accent focus:ring-2 focus:ring-accent focus:outline-none transition-colors duration-200"
+                                                                type="password" placeholder="Password" id="password"
+                                                                aria-label="Password" required />
+                                                </div>
+
+                                                <div class="flex items-center justify-between">
+                                                        <button type="submit"
+                                                                class="px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-accent rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50">
+                                                                Sign In
+                                                        </button>
+                                                </div>
+                                        </form>
+                                </div>
+                        </div>
+                </div>
+
+                <!-- footer -->
+                <footer class="footer w-full bg-card text-faded py-8 mt-auto">
+                        <div class="max-w-6xl mx-auto flex flex-col items-center space-y-2">
+                                <div class="flex space-x-4 mb-2">
+                                        <a href="https://x.com/afrojamszn" target="_blank" aria-label="X (Twitter)"
+                                                class="hover:text-accent transition-colors duration-200 flex items-center justify-center">
+                                                <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"
+                                                        aria-hidden="true">
+                                                        <path
+                                                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                                </svg>
+                                        </a>
+                                </div>
+                                <p class="text-xs">&copy; <span id="current-year"></span> - All rights reserved by
+                                        AfroJamSzn.</p>
+                        </div>
+                </footer>
+        </div>
+        <script>
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+        </script>
+</body>
+
+</html> 

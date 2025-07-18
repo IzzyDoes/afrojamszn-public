@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../images/IMG_0011.ico" type="image/x-icon">
+        <title>Blog Post</title>
+        <!-- Compiled Tailwind CSS -->
+        <link href="../output.css" rel="stylesheet">
+        <style>
+                /* Remove glossy finish from form elements */
+                select, input, button {
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        appearance: none;
+                        background-image: none !important;
+                }
+                
+                /* Remove default select arrow */
+                select {
+                        background-image: none !important;
+                        background: transparent !important;
+                }
+                
+                /* Custom select arrow */
+                select {
+                        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+                        background-repeat: no-repeat !important;
+                        background-position: right 0.5rem center !important;
+                        background-size: 1em !important;
+                        padding-right: 2.5rem !important;
+                }
+        </style>
+        <!-- SweetAlert2 for notifications -->
+</head>
+
+<body class="bg-background text-text min-h-screen flex flex-col">
+        <div class="wrapper flex flex-col min-h-screen">
+                <!-- Navbar -->
+                <nav class="w-full bg-card border-b border-faded">
+                        <div class="flex items-center justify-between max-w-6xl mx-auto px-4 py-3">
+                                <a href="./index.html" class="flex items-center space-x-2">
+                                        <img src="../images/Sample.png" alt="AfroJamSzn Logo" class="h-10 w-10 object-contain">
+                                        <span class="font-bold text-lg tracking-tight">AfroJamSzn</span>
+                                </a>
+                                <div class="flex items-center space-x-4">
+                                        <button id="adminBtn"
+                                                class="hidden px-4 py-2 rounded-lg bg-faded text-white font-semibold hover:bg-accent transition-colors duration-200">Admin
+                                                Panel</button>
+                                        <button id="logoutBtn"
+                                                class="hidden px-4 py-2 rounded-lg bg-faded text-white font-semibold hover:bg-red-600 transition-colors duration-200">Logout</button>
+                                </div>
+                        </div>
+                </nav>
+
+                <!-- Blog Container -->
+                <main class="flex-1 flex flex-col items-center mt-8">
+                        <section class="w-full max-w-3xl px-4">
+                                <h1 class="blog-title text-4xl md:text-7xl font-bold mb-2" id="blog-title">Loading...
+                                </h1>
+                                <div class="flex justify-between items-center mt-4 w-full">
+                                        <div class="flex items-center space-x-2">
+                                                <img src="../images/profile-avatar.png" alt="Author Avatar"
+                                                        class="w-10 h-10 rounded-full" id="author-avatar">
+                                                <div class="flex flex-col">
+                                                        <p class="author-name text-xs md:text-sm font-bold"
+                                                                id="author-name">Loading Author...</p>
+                                                        <p class="date-published text-xs md:text-sm text-faded"
+                                                                id="date-published">Loading Date...</p>
+                                                </div>
+                                        </div>
+                                        <ul class="flex flex-row items-center gap-2 md:gap-3 lg:gap-4">
+                                                <li>
+                                                        <button id="backBtn"
+                                                                class="w-8 h-8 p-2 rounded-full border border-faded text-faded hover:bg-faded hover:text-white transition-colors duration-200 inline-flex items-center justify-center"
+                                                                title="Go Back">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                        viewBox="0 0 24 24" stroke="currentColor"
+                                                                        class="h-5 w-5 text-accent">
+                                                                        <path stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="2"
+                                                                                d="M15 19l-7-7 7-7" />
+                                                                </svg>
+                                                        </button>
+                                                </li>
+                                                <li>
+                                                        <button id="shareBtn"
+                                                                class="w-8 h-8 p-2 rounded-full hover:bg-faded transition-colors duration-200 inline-flex items-center justify-center"
+                                                                title="Share this post">
+                                                                <svg xmlns='http://www.w3.org/2000/svg'
+                                                                        class='h-5 w-5 text-accent' fill='none'
+                                                                        viewBox='0 0 24 24' stroke='currentColor'>
+                                                                        <path stroke-linecap='round'
+                                                                                stroke-linejoin='round' stroke-width='2'
+                                                                                d='M15 8a3 3 0 11-6 0 3 3 0 016 0zm6 8a3 3 0 11-6 0 3 3 0 016 0zm-6 0a3 3 0 11-6 0 3 3 0 016 0zm6-8a3 3 0 11-6 0 3 3 0 016 0z' />
+                                                                </svg>
+                                                        </button>
+                                                </li>
+                                                <li>
+                                                                                                <a href="#" id="authorTwitterLink" aria-label="Author's X (Twitter)"
+                                                class="text-accent hover:text-blue-400 transition-colors duration-200 flex items-center justify-center"
+                                                title="Author's X (Twitter)" target="_blank">
+                                                <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"
+                                                        aria-hidden="true">
+                                                        <path
+                                                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                                </svg>
+                                        </a>
+                                                </li>
+                                        </ul>
+                                </div>
+                                <img id="header-image" class="mt-4 w-full max-h-60 object-contain rounded-2xl shadow-md mx-auto hidden" alt="Header Image" />
+                                <div class="blog-details px-8 py-4 bg-card mx-auto w-full rounded-2xl shadow-md mt-8">
+                                        <div class="text-left" id="blog-content">
+                                                <p class="text-base">Loading content...</p>
+                                        </div>
+                                </div>
+                                <!-- Category & Genre Badges (below post) -->
+                                <div class="flex items-center space-x-2 mt-4" id="badge-container"></div>
+                        </section>
+                </main>
+
+                <div class="divider w-full border-t border-faded my-8"></div>
+
+                <!-- Footer -->
+                <footer class="footer w-full bg-card text-faded py-8 mt-auto">
+                        <div class="max-w-6xl mx-auto flex flex-col items-center space-y-2">
+                                <div class="flex space-x-4 mb-2">
+                                        <a href="https://x.com/afrojamszn" target="_blank" aria-label="X (Twitter)"
+                                                class="hover:text-accent transition-colors duration-200 flex items-center justify-center">
+                                                <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24"
+                                                        aria-hidden="true">
+                                                        <path
+                                                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                                </svg>
+                                        </a>
+                                </div>
+                                <p class="text-xs">&copy; <span id="current-year"></span> - All rights reserved by
+                                        AfroJamSzn.</p>
+                        </div>
+                </footer>
+        </div>
+        <script src="../scripts/scripts.js"></script>
+        <script src="../scripts/logout.js" defer></script>
+        <script src="../scripts/sessionManager.js" defer></script>
+        <script>
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+        </script>
+        <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                        // API Configuration
+                        const blogPageApiUrl = window.location.hostname === 'localhost'
+                                ? 'http://localhost:5000/api'
+                                : 'https://api.afrojamszn.com/api';
+                        
+                        // Function to get query parameters
+                        function getQueryParam(param) {
+                                const urlParams = new URLSearchParams(window.location.search);
+                                return urlParams.get(param);
+                        }
+                        // Get the post slug from the URL
+                        const postSlug = getQueryParam('slug');
+                        const postId = getQueryParam('id');
+
+                        // Treat a literal string "undefined" as not valid
+                        const hasValidSlug = postSlug && postSlug !== 'undefined';
+                        let apiEndpoint = '';
+                        if (hasValidSlug) {
+                                apiEndpoint = `${blogPageApiUrl}/posts/slug/${postSlug}`;
+                        } else if (postId) {
+                                apiEndpoint = `${blogPageApiUrl}/posts/${postId}`;
+                        } else {
+                                window.location.href = 'index.html';
+                                return;
+                        }
+                        // Fetch the post data
+                        fetch(apiEndpoint)
+                                .then(response => {
+                                        if (!response.ok) {
+                                                if (response.status === 404) {
+                                                        throw new Error('Post not found.');
+                                                } else {
+                                                        throw new Error(`HTTP error! status: ${response.status}`);
+                                                }
+                                        }
+                                        return response.json();
+                                })
+                                .then(data => {
+                                        document.getElementById('blog-title').textContent = data.title || 'No Title';
+                                        document.getElementById('author-name').textContent = data.author || 'Unknown Author';
+                                        document.getElementById('date-published').textContent = data.createdAt ? new Date(data.createdAt).toLocaleDateString() : 'Unknown Date';
+                                        document.getElementById('header-image').src = data.headerImage || '../images/default-header.jpg';
+                                        document.getElementById('header-image').alt = data.title || 'Header Image';
+                                        document.getElementById('header-image').classList.remove('hidden'); // Show header image
+                                        const blogContent = data.description || 'No Description Available';
+                                        document.getElementById('blog-content').innerHTML = blogContent;
+
+                                        // Insert badges
+                                        const badgeContainer = document.getElementById('badge-container');
+                                        if (badgeContainer) {
+                                                const categoryBadge = `<span class="badge bg-accent text-white text-xs px-2 py-1 rounded-full">${data.category || 'Uncategorized'}</span>`;
+                                                const genreBadge = data.genre ? `<span class="badge bg-faded text-white text-xs px-2 py-1 rounded-full">${data.genre}</span>` : '';
+                                                badgeContainer.innerHTML = categoryBadge + genreBadge;
+                                        }
+                                        if (data.authorAvatarUrl) {
+                                                document.getElementById('author-avatar').src = data.authorAvatarUrl;
+                                        }
+                                        // Show/hide author Twitter link
+                                        const authorTwitterLink = document.getElementById('authorTwitterLink');
+                                        if (authorTwitterLink) {
+                                                if (data.authorTwitter) {
+                                                        authorTwitterLink.href = data.authorTwitter;
+                                                        authorTwitterLink.style.display = '';
+                                                } else {
+                                                        authorTwitterLink.style.display = 'none';
+                                                }
+                                        }
+                                        document.getElementById('current-year').textContent = new Date().getFullYear();
+                                })
+                                .catch(error => {
+                                        console.error('Error fetching the post:', error);
+                                        window.location.href = 'index.html';
+                                });
+
+                        // Back button logic
+                        const backBtn = document.getElementById('backBtn');
+                        if (backBtn) {
+                                backBtn.addEventListener('click', (e) => {
+                                        e.preventDefault();
+                                        window.history.back();
+                                });
+                        }
+
+                        // Share button logic
+                        const shareBtn = document.getElementById('shareBtn');
+                        if (shareBtn) {
+                                shareBtn.addEventListener('click', (e) => {
+                                        e.preventDefault();
+                                        const url = window.location.href;
+                                        navigator.clipboard.writeText(url).then(() => {
+                                                showNotification('Post link copied to clipboard!', 'success');
+                                        }).catch(() => {
+                                                showNotification('Failed to copy link.', 'error');
+                                        });
+                                });
+                        }
+
+                        // Notification function for share button
+                        function showNotification(message, type) {
+                                const notification = document.createElement('div');
+                                notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-300 transform translate-x-full`;
+                                if (type === 'success') {
+                                        notification.classList.add('bg-green-600', 'text-white');
+                                } else {
+                                        notification.classList.add('bg-red-600', 'text-white');
+                                }
+                                notification.textContent = message;
+                                document.body.appendChild(notification);
+                                setTimeout(() => {
+                                        notification.classList.remove('translate-x-full');
+                                }, 100);
+                                setTimeout(() => {
+                                        notification.classList.add('translate-x-full');
+                                        setTimeout(() => {
+                                                if (notification.parentNode) {
+                                                        notification.parentNode.removeChild(notification);
+                                                }
+                                        }, 300);
+                                }, 3000);
+                        }
+                });
+        </script>
+</body>
+
+</html>
