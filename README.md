@@ -1,6 +1,6 @@
 # AfroJamSzn - Full Stack Music Blog Platform
 
-A modern, full-stack music publication platform built with Node.js, Express, MongoDB, and vanilla JavaScript. Features a clean admin panel, JWT authentication, comprehensive analytics, and responsive design.
+This is a simple, full-stack music publication platform built with Node.js, Express, MongoDB, and vanilla JavaScript. It features a clean administrator panel, JWT authentication, comprehensive analytics, and responsive design.
 
 ## 🚀 Live Site
 
