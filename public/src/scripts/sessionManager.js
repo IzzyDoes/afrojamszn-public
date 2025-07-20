@@ -163,15 +163,15 @@ class SessionManager {
                 // Remove session data and cookies
                 localStorage.removeItem('token');
                 localStorage.removeItem('role');
-                document.cookie = 'token=; Max-Age=0; Path=/; Domain=.afrojamszn.com';
-                document.cookie = 'role=; Max-Age=0; Path=/; Domain=.afrojamszn.com';
+                        document.cookie = 'token=; Max-Age=0; Path=/; Domain=.yourdomain.com';
+        document.cookie = 'role=; Max-Age=0; Path=/; Domain=.yourdomain.com';
 
                 // Show notification
                 this.showNotification(`Logged out: ${reason}`, 'error');
 
                 // Redirect to correct login page based on host
                 setTimeout(() => {
-                        const isAdminSubdomain = window.location.hostname === 'admin.afrojamszn.com';
+                        const isAdminSubdomain = window.location.hostname === 'admin.yourdomain.com';
                         window.location.href = isAdminSubdomain ? 'admin-login.html' : 'login.html';
                 }, 2000);
         }

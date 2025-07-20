@@ -6,35 +6,35 @@ const Post = require('./models/posts'); // Adjust the path if your Post model is
 // Sample articles data
 const samplePosts = [
         {
-                title: "Confusing Asynchronous JavaScript",
-                description: "An in-depth look at callbacks, promises, and async/await in JavaScript.",
-                author: "Jane Doe",
-                tags: ["JavaScript", "Asynchronous", "Programming"],
-                headerImageUrl: "https://via.placeholder.com/800x400.png?text=Asynchronous+JavaScript",
+                title: "Getting Started with Web Development",
+                description: "A comprehensive guide for beginners looking to start their journey in web development. Learn the basics of HTML, CSS, and JavaScript.",
+                author: "Web Dev Team",
+                tags: ["Web Development", "HTML", "CSS", "JavaScript", "Beginner"],
+                headerImageUrl: "https://via.placeholder.com/800x400.png?text=Web+Development+Guide",
                 published: true
         },
         {
-                title: "A Guide to Node.js Performance Optimization",
-                description: "Tips and techniques for improving the performance of your Node.js applications.",
-                author: "John Smith",
-                tags: ["Node.js", "Performance", "Optimization"],
-                headerImageUrl: "https://via.placeholder.com/800x400.jpg?text=Node.js+Performance",
+                title: "Understanding Modern JavaScript Frameworks",
+                description: "Explore the world of modern JavaScript frameworks like React, Vue, and Angular. Learn when to use each one and their key differences.",
+                author: "Tech Writer",
+                tags: ["JavaScript", "React", "Vue", "Angular", "Frontend"],
+                headerImageUrl: "https://via.placeholder.com/800x400.jpg?text=JavaScript+Frameworks",
                 published: true
         },
         {
-                title: "Mastering CSS Grid Layout",
-                description: "Learn how to build complex and responsive layouts using CSS Grid.",
-                author: "Emily Clark",
-                tags: ["CSS", "Web Design", "Frontend"],
-                headerImageUrl: "https://via.placeholder.com/800x400.png?text=CSS+Grid+Layout",
+                title: "The Future of Web Design",
+                description: "Discover the latest trends in web design and how they're shaping the future of user experience and interface design.",
+                author: "Design Expert",
+                tags: ["Web Design", "UX", "UI", "Trends", "Design"],
+                headerImageUrl: "https://via.placeholder.com/800x400.png?text=Future+of+Web+Design",
                 published: false
         },
         {
-                title: "Introduction to Machine Learning with Python",
-                description: "A beginner's guide to machine learning concepts and implementing them using Python.",
-                author: "Michael Lee",
-                tags: ["Machine Learning", "Python", "Data Science"],
-                headerImageUrl: "https://via.placeholder.com/800x400.jpg?text=Machine+Learning+Python",
+                title: "Introduction to Backend Development",
+                description: "Learn the fundamentals of backend development including databases, APIs, and server-side programming concepts.",
+                author: "Backend Developer",
+                tags: ["Backend", "API", "Database", "Server", "Programming"],
+                headerImageUrl: "https://via.placeholder.com/800x400.jpg?text=Backend+Development",
                 published: true
         }
 ];

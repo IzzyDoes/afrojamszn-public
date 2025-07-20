@@ -7,16 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         localStorage.removeItem('token');
                         localStorage.removeItem('role');
                         // Remove token cookies as well
-                        document.cookie = 'token=; Max-Age=0; Path=/; Domain=.afrojamszn.com';
-                        document.cookie = 'role=; Max-Age=0; Path=/; Domain=.afrojamszn.com';
+                                document.cookie = 'token=; Max-Age=0; Path=/; Domain=.yourdomain.com';
+        document.cookie = 'role=; Max-Age=0; Path=/; Domain=.yourdomain.com';
 
                         showNotification('Logged out successfully!', 'success');
                         setTimeout(() => {
                                 // Redirect to admin login if on admin subdomain, otherwise to main site
-                                if (window.location.hostname === 'admin.afrojamszn.com') {
+                                if (window.location.hostname === 'admin.yourdomain.com') {
                                         window.location.href = 'admin-login.html';
                                 } else {
-                                        window.location.href = 'https://afrojamszn.com';
+                                        window.location.href = 'https://yourdomain.com';
                                 }
                         }, 1000);
                 });

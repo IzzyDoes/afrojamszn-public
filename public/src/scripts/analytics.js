@@ -3,7 +3,7 @@ class AnalyticsDashboard {
         constructor() {
                 this.baseUrl = window.location.hostname === 'localhost'
                         ? 'http://localhost:5000/api/analytics'
-                        : 'https://api.afrojamszn.com/api/analytics';
+                        : 'https://api.yourdomain.com/api/analytics';
 
                 // Preload Google GeoChart package with optional Maps API key
                 if (typeof google !== 'undefined') {

@@ -19,9 +19,9 @@ const debounce = (func, delay) => {
 // API Configuration
 const searchApiUrl = window.location.hostname === 'localhost'
         ? 'http://localhost:5000/api'
-        : window.location.hostname === 'admin.afrojamszn.com'
-        ? 'https://admin.afrojamszn.com/api'
-        : 'https://api.afrojamszn.com/api';
+        : window.location.hostname === 'admin.yourdomain.com'
+        ? 'https://admin.yourdomain.com/api'
+        : 'https://api.yourdomain.com/api';
 
 const performSearch = async (query) => {
         const blogContainer = document.querySelector('.card-container-main');

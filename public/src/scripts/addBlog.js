@@ -1,9 +1,9 @@
 // API Configuration
 const blogApiUrl = window.location.hostname === 'localhost'
         ? 'http://localhost:5000/api'
-        : window.location.hostname === 'admin.afrojamszn.com'
-        ? 'https://admin.afrojamszn.com/api'
-        : 'https://api.afrojamszn.com/api';
+        : window.location.hostname === 'admin.yourdomain.com'
+        ? 'https://admin.yourdomain.com/api'
+        : 'https://api.yourdomain.com/api';
 
 document.addEventListener('DOMContentLoaded', () => {
         const form = document.getElementById('blogForm');

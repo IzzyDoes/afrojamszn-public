@@ -6,9 +6,9 @@ services:
     container_name: blog-mongodb
     restart: unless-stopped
     environment:
-      MONGO_INITDB_ROOT_USERNAME: izzy
-      MONGO_INITDB_ROOT_PASSWORD: 1STstartFinish
-      MONGO_INITDB_DATABASE: blogApp
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-password}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE:-blogApp}
     volumes:
       - mongodb_data:/data/db
     ports:
@@ -21,7 +21,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=5000
-      - MONGO_URI=mongodb://izzy:1STstartFinish@blog-mongodb:27017/blogApp
+      - MONGO_URI=mongodb://${MONGO_USERNAME:-admin}:${MONGO_PASSWORD:-password}@blog-mongodb:27017/${MONGO_DATABASE:-blogApp}
       - JWT_SECRET=${JWT_SECRET}
       - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
       - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}

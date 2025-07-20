@@ -57,9 +57,9 @@ cloudinary.config({
 const corsOptions = {
         origin: config.NODE_ENV === 'production'
                 ? [
-                        'https://afrojamszn.com',
-                        'https://www.afrojamszn.com',
-                        'https://admin.afrojamszn.com',
+                        'https://yourdomain.com',
+                        'https://www.yourdomain.com',
+                        'https://admin.yourdomain.com',
                         getSecret('frontend_url', 'FRONTEND_URL')
                 ].filter(Boolean)
                 : '*',
@@ -77,7 +77,7 @@ app.use(helmet({
                         scriptSrc: ["'self'", "https://cdn.jsdelivr.net", "https://cdn.quilljs.com"],
                         imgSrc: ["'self'", "data:", "https:", "blob:"],
                         fontSrc: ["'self'", "https://cdn.jsdelivr.net"],
-                        connectSrc: ["'self'", "https://afrojamszn.com", "https://api.afrojamszn.com"],
+                        connectSrc: ["'self'", "https://yourdomain.com", "https://api.yourdomain.com"],
                         frameSrc: ["'none'"],
                         objectSrc: ["'none'"],
                         upgradeInsecureRequests: []
@@ -116,7 +116,7 @@ app.use(express.static(path.join(__dirname, '../public/src')));
 
 // Serve different HTML files based on hostname
 app.get('/', (req, res) => {
-        if (req.get('host') === 'admin.afrojamszn.com') {
+        if (req.get('host') === 'admin.yourdomain.com') {
                 res.sendFile(path.join(__dirname, '../public/src/pages/login.html'));
         } else {
                 res.sendFile(path.join(__dirname, '../public/src/pages/index.html'));
@@ -124,7 +124,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/admin', (req, res) => {
-        if (req.get('host') === 'admin.afrojamszn.com') {
+        if (req.get('host') === 'admin.yourdomain.com') {
                 res.sendFile(path.join(__dirname, '../public/src/pages/admin.html'));
         } else {
                 res.status(404).send('Not Found');
@@ -132,7 +132,7 @@ app.get('/admin', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-        if (req.get('host') === 'admin.afrojamszn.com') {
+        if (req.get('host') === 'admin.yourdomain.com') {
                 res.sendFile(path.join(__dirname, '../public/src/pages/login.html'));
         } else {
                 res.status(404).send('Not Found');
@@ -140,7 +140,7 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/blog', (req, res) => {
-        if (req.get('host') !== 'admin.afrojamszn.com') {
+        if (req.get('host') !== 'admin.yourdomain.com') {
                 res.sendFile(path.join(__dirname, '../public/src/pages/blog.html'));
         } else {
                 res.status(404).send('Not Found');
@@ -148,7 +148,7 @@ app.get('/blog', (req, res) => {
 });
 
 app.get('/accessDenied', (req, res) => {
-        if (req.get('host') === 'admin.afrojamszn.com') {
+        if (req.get('host') === 'admin.yourdomain.com') {
                 res.sendFile(path.join(__dirname, '../public/src/pages/accessDenied.html'));
         } else {
                 res.status(404).send('Not Found');

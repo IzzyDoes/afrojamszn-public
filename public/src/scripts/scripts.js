@@ -8,12 +8,12 @@ function stripHtmlTags(html) {
 // API Configuration
 const mainApiUrl = window.location.hostname === 'localhost'
         ? 'http://localhost:5000/api'
-        : window.location.hostname === 'admin.afrojamszn.com'
-        ? 'https://admin.afrojamszn.com/api'
-        : 'https://api.afrojamszn.com/api';
+        : window.location.hostname === 'admin.yourdomain.com'
+        ? 'https://admin.yourdomain.com/api'
+        : 'https://api.yourdomain.com/api';
 
 // Determine if we are on the admin sub-domain
-const isAdminSubdomain = window.location.hostname === 'admin.afrojamszn.com';
+const isAdminSubdomain = window.location.hostname === 'admin.yourdomain.com';
 
 // Run DOM manipulations after DOMContentLoaded event
 document.addEventListener('DOMContentLoaded', async () => {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (adminButton) {
                 adminButton.addEventListener('click', () => {
                         // Admin panel is now completely separate - redirect to admin subdomain
-                        window.location.href = 'https://admin.afrojamszn.com';
+                        window.location.href = 'https://admin.yourdomain.com';
                 });
         }
 

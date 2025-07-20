@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // API Configuration
                 const loginApiUrl = window.location.hostname === 'localhost'
                         ? 'http://localhost:5000/api'
-                        : 'https://api.afrojamszn.com/api';
+                        : 'https://api.yourdomain.com/api';
 
                 const endpoint = isRegistering
                         ? `${loginApiUrl}/auth/register`
@@ -73,8 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                                         // Also set a cookie on parent domain so other subdomains can read it
                                         const twoHours = 2 * 60 * 60; // seconds
-                                        document.cookie = `token=${data.token}; Max-Age=${twoHours}; Path=/; Domain=.afrojamszn.com; Secure; SameSite=Lax`;
-                                        document.cookie = `role=${data.role}; Max-Age=${twoHours}; Path=/; Domain=.afrojamszn.com; Secure; SameSite=Lax`;
+                                                        document.cookie = `token=${data.token}; Max-Age=${twoHours}; Path=/; Domain=.yourdomain.com; Secure; SameSite=Lax`;
+                document.cookie = `role=${data.role}; Max-Age=${twoHours}; Path=/; Domain=.yourdomain.com; Secure; SameSite=Lax`;
 
                                         showNotification('Login successful!', 'success');
 

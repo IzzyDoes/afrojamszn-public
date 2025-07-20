@@ -1,4 +1,4 @@
-# AfroJamSzn: A Full-Stack Music Publication Platform
+# Blog Platform: A Full-Stack Content Management System
 
 ## Technical Overview
 
@@ -11,14 +11,14 @@
 ### Content Management
 - **Rich Text Editor:** Quill.js WYSIWYG with inline image uploads via Cloudinary
 - **Media Pipeline:** Drag-and-drop header images with automatic optimization and cropping
-- **Taxonomy System:** Category/genre classification (New Releases, Artists, Music Videos, Afrobeats, Amapiano, etc.)
+- **Taxonomy System:** Category/genre classification (Technology, Design, Development, etc.)
 - **SEO Optimization:** Automatic slug generation and meta tag management
 
 ### Authentication & Security
 - **JWT-based Auth:** Role-based access control (Admin/Editor/Guest)
 - **Session Management:** Auto-logout after inactivity with warning notifications
 - **Input Sanitization:** XSS protection and content validation
-- **Subdomain Isolation:** Admin panel on separate subdomain (`admin.afrojamszn.com`)
+- **Subdomain Isolation:** Admin panel on separate subdomain (`admin.yourdomain.com`)
 
 ### Analytics Engine
 - **Custom Tracking:** Page views, sessions, click events, scroll depth, geo-location
@@ -30,16 +30,16 @@
 - **Responsive Design:** Mobile-first Tailwind CSS implementation
 - **Search & Filter:** Server-side search with debounced client queries
 - **Pagination:** Infinite scroll with state preservation
-- **Social Features:** Share buttons, author Twitter integration
+- **Social Features:** Share buttons, author integration
 
 ## Infrastructure
 
 ### Container Architecture
 ```
 Nginx Proxy Manager (Port 80/443)
-├── afrojamszn.com → Frontend Container (Port 3000)
-├── admin.afrojamszn.com → Admin Panel (Port 3000)  
-└── api.afrojamszn.com → Backend API (Port 4000)
+├── yourdomain.com → Frontend Container (Port 3000)
+├── admin.yourdomain.com → Admin Panel (Port 3000)  
+└── api.yourdomain.com → Backend API (Port 4000)
 ```
 
 ### Deployment Pipeline
@@ -101,4 +101,4 @@ MongoDB Atlas or local instance
 - **Uptime:** 99.9% (single VPS)
 - **Test Coverage:** 95% (unit tests for critical paths)
 
-This architecture demonstrates modern web development practices with a focus on maintainability, security, and user experience. The platform serves as a foundation for independent music journalism with room for community features and advanced analytics.
+This architecture demonstrates modern web development practices with a focus on maintainability, security, and user experience. The platform serves as a foundation for content management with room for community features and advanced analytics.
