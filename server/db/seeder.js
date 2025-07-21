@@ -40,12 +40,10 @@ const seedAdminUser = async () => {
 
                         await adminUser.save();
                         console.log('✅ Admin user created successfully');
-                        console.log('👤 Username: admin');
-                        console.log('🔑 Password: admin123');
+                        console.log('👤 Username: ');
+                        console.log('🔑 Password: ');
                         console.log('⚠️  IMPORTANT: Change these default credentials in production!');
-                } else {
-                        console.log('ℹ️  Admin user already exists');
-                }
+                } 
         } catch (error) {
                 console.error('❌ Error creating admin user:', error);
         }
