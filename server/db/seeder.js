@@ -18,7 +18,7 @@ const seedDatabase = async () => {
                 }
 
         } catch (error) {
-                console.error('❌ Error seeding database:', error);
+                console.error(' Error seeding database:', error);
         }
 };
 
@@ -29,7 +29,7 @@ const seedAdminUser = async () => {
 
                 if (!adminExists) {
                         // Hash the password
-                        const hashedPassword = await bcrypt.hash('admin123', 10);
+                        const hashedPassword = await bcrypt.hash('admin1', 10);
 
                         // Create admin user
                         const adminUser = new User({
@@ -39,13 +39,13 @@ const seedAdminUser = async () => {
                         });
 
                         await adminUser.save();
-                        console.log('✅ Admin user created successfully');
-                        console.log('👤 Username: ');
-                        console.log('🔑 Password: ');
-                        console.log('⚠️  IMPORTANT: Change these default credentials in production!');
+                        console.log(' Admin user created successfully');
+                        console.log(' Username: ');
+                        console.log(' Password: ');
+                        console.log(' IMPORTANT: Change these default credentials in production!');
                 } 
         } catch (error) {
-                console.error('❌ Error creating admin user:', error);
+                console.error('Error creating admin user:', error);
         }
 };
 
@@ -80,12 +80,12 @@ const seedSamplePosts = async () => {
                         ];
 
                         await Post.insertMany(samplePosts);
-                        console.log('✅ Sample posts created successfully');
+                        console.log(' Sample posts created successfully');
                 } else {
-                        console.log('ℹ️  Posts already exist, skipping sample data');
+                        console.log('Posts already exist, skipping sample data');
                 }
         } catch (error) {
-                console.error('❌ Error creating sample posts:', error);
+                console.error('Error creating sample posts:', error);
         }
 };
 
@@ -192,12 +192,12 @@ const seedSampleAnalytics = async () => {
                         await AnalyticsClick.insertMany(sampleClicks);
                         await AnalyticsError.insertMany(sampleErrors);
 
-                        console.log('✅ Sample analytics data created successfully');
+                        console.log('Sample analytics data created successfully');
                 } else {
-                        console.log('ℹ️  Analytics data already exists, skipping sample data');
+                        console.log('Analytics data already exists, skipping sample data');
                 }
         } catch (error) {
-                console.error('❌ Error creating sample analytics data:', error);
+                console.error('Error creating sample analytics data:', error);
         }
 };
 
