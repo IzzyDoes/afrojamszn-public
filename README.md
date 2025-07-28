@@ -1,4 +1,4 @@
-# Blog Platform - Full Stack Web Application
+# Blog Platform - Full Stack Web Application (THIS IS A STRIPPED VERSION OF PRODUCTION CODE)
 
 This was my very first "real" project,it's a full-stack blog platform built with Node.js, Express, MongoDB, and vanilla JavaScript. Features include content management, user authentication, analytics, and responsive design. I chose Javascript as the sole dev language for continuity and also to prpactice my js skills. `honestly, it was a little complex, understanding authentication was a hassle, but yeah so far so good.
 
