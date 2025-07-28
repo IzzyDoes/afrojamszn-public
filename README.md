@@ -6,7 +6,7 @@ This was my very first "real" project,it's a full-stack blog platform built with
 
 - **Content Management**: Rich text editor (I initially built a self made text editor before finding about Quilljs- obvioudly the better choice) with image uploads
 - **User Authentication**: JWT-based authentication with role-based access... admin only for now, later in the future, I might add user account
-- **Analytics Dashboard**: I added some Real-time analytics with Google Charts integration
+- **Analytics Dashboard**: Real-time analytics with Google Charts integration
 - **Search & Filter**: Server-side search with debounced queries
 
 ## Tech Stack
@@ -75,6 +75,9 @@ This was my very first "real" project,it's a full-stack blog platform built with
 └── docker-compose.yml   # Docker Compose setup
 ```
 
+Contributing
+
+This repo is closed for any pull requests as they will be rejected. you can fork and maintain a version.
 
 ## 📄 License
 
